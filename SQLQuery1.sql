@@ -36,6 +36,17 @@ INSERT INTO Books (title,author,price) VALUES ('Pride and Prejudice','Jane Auste
 
 SELECT * FROM Books WHERE price > 10.00;
 
+SELECT MIN(price) AS Minimam_price FROM Books;
+SELECT MAX(price) AS MAXIMAM_price FROM Books;
+SELECT AVG(price) AS average_price FROM Books;
+SELECT SUM(price) AS sum_price FROM Books;
+SELECT COUNT(price) AS count_price FROM Books;
+/*********************************/
+SELECT * FROM Books ORDER BY price;
+SELECT * FROM Books ORDER BY price DESC;
+SELECT * FROM Books WHERE price IN (10.99, 9.75);
+SELECT COUNT(id), title FROM Books GROUP BY title HAVING COUNT(id) > 1;
+
 /*  drop the table called 'books'  */
 DROP TABLE Books;
 
@@ -122,6 +133,11 @@ INSERT INTO Products (product_id,product_name,category,price,quantity_in_stock) 
 
 SELECT * FROM Products;
 SELECT * FROM Products WHERE category = 'Electronics';
+
+SELECT COUNT(price) FROM Products GROUP BY category;
+/*********************************/
+SELECT COUNT(product_id), category FROM Products GROUP BY category HAVING COUNT(product_id) > 1;
+
 
 /**************************************************************************************************************/
 /*  Task 7:    */
