@@ -21,7 +21,7 @@ INSERT INTO sales ( sale_id,sale_date, sale_amount) VALUES
   (6,'2022-02-20', 175.00);
 
 /* 1 */
-SELECT SUM(sale_amount) AS total_sales FROM sales GROUP BY DATEPART(year, sale_date), DATEPART(month, sale_date);
+SELECT SUM(sale_amount) AS total_sales FROM sales GROUP BY DATEPART(month, sale_date);
 /* 2 */
 SELECT AVG(sale_amount) AS SALE_AVG FROM sales;
 /* 3 */
