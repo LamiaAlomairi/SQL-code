@@ -253,9 +253,7 @@ ON e.salary BETWEEN g.min_salary AND g.max_salary WHERE d.dep_id = 1001 OR d.dep
 SELECT e.*, d.dep_name, d.dep_location FROM employee e INNER JOIN department d ON e.dep_id = d.dep_id;
 
 /*84.Write a SQL query to list the employees who are senior to their MANAGERS. Return complete information about the employees.*/
-SELECT e.* FROM employee e JOIN employee d ON e.manager_id = d.emp_id WHERE d.job_name = 'MANAGERS';
-
-SELECT e1.* FROM employee e1 INNER JOIN employee e2 ON e1.manager_id = e2.emp_id WHERE e1.hire_date < e2.hire_date;
+SELECT e1.* FROM employee e1 INNER JOIN employee e2 ON e1.manager_id = e2.emp_id WHERE e1.hire_date > e2.hire_date;
 
 /*85.Write a SQL query to find those employees who work in the department 1001. Sort the result-set in ascending order by salary. Return employee ID, employee name, salary and department ID.*/
 SELECT emp_id, emp_name,salary, dep_id FROM employee WHERE dep_id = 1001 ORDER BY salary ASC;
@@ -264,7 +262,7 @@ SELECT emp_id, emp_name,salary, dep_id FROM employee WHERE dep_id = 1001 ORDER B
 SELECT MAX(salary) AS SecondHighestSalary FROM employee WHERE salary < (SELECT MAX(salary) FROM employee);
 
 /*87.Write a SQL query to calculate the average salary and average total remuneration (salary and commission) for each type of job. Return name, average salary and average total remuneration.*/
-SELECT DISTINCT job_name, AVG(salary) AS Avg_salary, AVG(salary + commission) AS total_remuneration FROM employee GROUP BY job_name ;
+SELECT DISTINCT job_name, AVG(salary) AS Avg_salary, AVG(salary + commission) AS average_total_remuneration FROM employee GROUP BY job_name;
 
 /*88.Write a SQL query to calculate the total annual salary distributed across each job in 1991. Return job name, total annual salary.*/
 SELECT DISTINCT job_name, SUM(salary) AS annual_salary FROM employee WHERE YEAR(hire_date) = 1991 GROUP BY job_name ;
@@ -339,7 +337,6 @@ SELECT * FROM employee WHERE MONTH(hire_date) LIKE '%a%';
 
 SELECT * FROM employee WHERE CHARINDEX('a', UPPER(DATENAME(month, hire_date))) > 0;
 
-
 /*111.Write a SQL query to find those employees who joined in any month, but the name of the month contain the character ‘A’ in second position. */
 SELECT * FROM employee WHERE MONTH(hire_date) LIKE '_a%';
 
@@ -353,4 +350,6 @@ SELECT * FROM employee e left join department d on e.dep_id = d.dep_id left join
 SELECT * FROM department d left join employee e on d.dep_id = e.dep_id left join salary_grade s on e.salary between s.min_salary and s.max_salary;
 
 SELECT * FROM salary_grade s left join employee e on e.salary between s.min_salary and s.max_salary left join department d on e.dep_id = d.dep_id ;
-
+/* CREATE VIEW **********************************************************/
+CREATE VIEW DETAILS AS SELECT e.emp_name, g.grade FROM employee e, salary_grade g WHERE e.salary BETWEEN g.min_salary AND g.max_salary;
+SELECT * FROM DETAILS;
